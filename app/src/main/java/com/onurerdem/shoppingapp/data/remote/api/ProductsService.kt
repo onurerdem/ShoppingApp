@@ -11,4 +11,7 @@ interface ProductsService {
 
     @GET("rate")
     suspend fun getRates(): Response<Rating>
+
+    @GET("products")
+    suspend fun getAllProducts(): Response<ArrayList<ProductsItem>>
 }

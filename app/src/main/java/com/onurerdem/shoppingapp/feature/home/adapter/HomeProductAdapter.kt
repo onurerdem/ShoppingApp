@@ -6,10 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.onurerdem.shoppingapp.data.model.ProductsItem
+import com.onurerdem.shoppingapp.data.model.ProductsItemDTO
 import com.onurerdem.shoppingapp.databinding.ItemProductLayoutBinding
 
 class HomeProductAdapter(private val listener: OnShoppingCartClickListener) :
-    ListAdapter<ProductsItem, HomeProductAdapter.ProductViewHolder>(ProductDiffUtil()) {
+    ListAdapter<ProductsItemDTO, HomeProductAdapter.ProductViewHolder>(ProductDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         return ProductViewHolder(
             ItemProductLayoutBinding.inflate(
@@ -26,19 +27,19 @@ class HomeProductAdapter(private val listener: OnShoppingCartClickListener) :
 
     class ProductViewHolder(private val binding: ItemProductLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: ProductsItem, listener: OnShoppingCartClickListener) {
+        fun bind(data: ProductsItemDTO, listener: OnShoppingCartClickListener) {
             binding.dataHolder = data
             binding.listener = listener
             binding.executePendingBindings()
         }
     }
 
-    class ProductDiffUtil : DiffUtil.ItemCallback<ProductsItem>() {
-        override fun areItemsTheSame(oldItem: ProductsItem, newItem: ProductsItem): Boolean {
+    class ProductDiffUtil : DiffUtil.ItemCallback<ProductsItemDTO>() {
+        override fun areItemsTheSame(oldItem: ProductsItemDTO, newItem: ProductsItemDTO): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: ProductsItem, newItem: ProductsItem): Boolean {
+        override fun areContentsTheSame(oldItem: ProductsItemDTO, newItem: ProductsItemDTO): Boolean {
             return oldItem == newItem
         }
     }
@@ -46,5 +47,5 @@ class HomeProductAdapter(private val listener: OnShoppingCartClickListener) :
 
 interface OnShoppingCartClickListener {
     fun onAddShoppingCartClick(id: Int?)
-    fun onRemoveShoppingCartClick(productsItem: ProductsItem)
+    fun onRemoveShoppingCartClick(productsItem: ProductsItemDTO)
 }

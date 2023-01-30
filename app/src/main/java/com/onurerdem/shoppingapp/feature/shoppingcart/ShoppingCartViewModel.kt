@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.onurerdem.shoppingapp.data.model.ProductsItem
+import com.onurerdem.shoppingapp.data.model.ProductsItemDTO
 import com.onurerdem.shoppingapp.data.model.Rating
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -40,7 +41,7 @@ class ShoppingCartViewModel @Inject constructor(
             docRef.addOnSuccessListener { result ->
                 if (result.isEmpty.not()) {
                     val list = result.documents.map {
-                        ProductsItem(
+                        ProductsItemDTO(
                             id = it.get("id") as Int?,
                             title = it.get("title") as String?,
                             image = it.get("image") as String?,
@@ -48,8 +49,8 @@ class ShoppingCartViewModel @Inject constructor(
                             isShoppingCart = true,
                             category = it.get("category") as String?,
                             price = it.get("price") as Double?,
-                            rating = it.get("rating") as Rating?,
-                            results = it.get("results") as List<ProductsItem?>?
+                            rating = it.get("rating") as Rating?
+                            //results = it.get("results") as List<ProductsItem?>?
                         )
                     }
                     _uiState.value =
@@ -83,8 +84,8 @@ class ShoppingCartViewModel @Inject constructor(
 
 sealed class ShoppingCartViewState {
     data class Success(
-        val data: MutableList<ProductsItem>,
-        val filteredData: MutableList<ProductsItem>
+        val data: MutableList<ProductsItemDTO>,
+        val filteredData: MutableList<ProductsItemDTO>
     ) : ShoppingCartViewState()
 
     object Loading : ShoppingCartViewState()

@@ -17,4 +17,8 @@ class ProductsRemoteDataSourceImpl @Inject constructor(private val productsServi
     override suspend fun getRateProducts(rate: Double): Flow<DataState<Rating>> {
         return getResult { productsService.getRates() }
     }
+
+    override suspend fun getAllProducts(): Flow<DataState<ArrayList<ProductsItem>>> {
+        return getResult { productsService.getAllProducts() }
+    }
 }

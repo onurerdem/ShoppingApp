@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.onurerdem.shoppingapp.data.model.ProductsItem
+import com.onurerdem.shoppingapp.data.model.ProductsItemDTO
 import com.onurerdem.shoppingapp.databinding.FragmentShoppingCartBinding
 import com.onurerdem.shoppingapp.feature.home.adapter.HomeProductAdapter
 import com.onurerdem.shoppingapp.feature.home.adapter.OnShoppingCartClickListener
@@ -57,7 +58,7 @@ class ShoppingCartFragment : Fragment(), OnShoppingCartClickListener {
 
     }
 
-    private fun initAdapter(data: MutableList<ProductsItem>) {
+    private fun initAdapter(data: MutableList<ProductsItemDTO>) {
         binding.rvShoppingCart.adapter =
             HomeProductAdapter(this@ShoppingCartFragment).apply {
                 submitList(data)
@@ -89,7 +90,7 @@ class ShoppingCartFragment : Fragment(), OnShoppingCartClickListener {
         TODO("Not yet implemented")
     }
 
-    override fun onRemoveShoppingCartClick(productsItem: ProductsItem) {
+    override fun onRemoveShoppingCartClick(productsItem: ProductsItemDTO) {
         TODO("Not yet implemented")
     }
 }

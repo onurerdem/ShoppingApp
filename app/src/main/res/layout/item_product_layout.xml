@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout>
 
     <data>
 
         <variable
             name="dataHolder"
-            type="com.onurerdem.shoppingapp.data.model.ProductsItem" />
+            type="com.onurerdem.shoppingapp.data.model.ProductsItemDTO" />
 
         <variable
             name="listener"
@@ -15,79 +13,120 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardView"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="5dp"
+            android:elevation="10dp"
             app:cardCornerRadius="12dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/ivProductImageCardView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="8dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/ivProductImage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:scaleType="centerInside"
-                        app:loadImage="@{dataHolder.image}"
-                        tools:src="@drawable/ic_launcher_background" />
-                </com.google.android.material.card.MaterialCardView>
-
-                <TextView
-                    android:id="@+id/tvProductTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="@{dataHolder.title}"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@id/ivProductImageCardView"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="dfgfdhgdh" />
-
-                <TextView
-                    android:id="@+id/tvProductPrice"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:ellipsize="end"
-                    android:maxLines="4"
-                    android:text="@{dataHolder.price.toString()}"
-                    app:layout_constraintBottom_toTopOf="@+id/ivShoppingCart"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/ivProductImageCardView"
-                    app:layout_constraintTop_toBottomOf="@id/tvProductTitle"
-                    tools:text="Price" />
+                android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/ivShoppingCart"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/ivCardItemProductImage"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="@{() -> listener.onRemoveShoppingCartClick(dataHolder)}"
-                    android:src="@{dataHolder.isShoppingCart ? @drawable/ic_baseline_remove_shopping_cart_24 : @drawable/ic_baseline_add_shopping_cart_24}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="Product Image"
+                    android:maxHeight="200dp"
+                    android:scaleType="fitXY"
+                    app:loadImage="@{dataHolder.image}"
+                    app:srcCompat="@drawable/ic_launcher_background" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvCardItemProductName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:paddingHorizontal="8dp"
+                        android:text="@{dataHolder.title}"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:text="Men's Hat" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="10dp"
+                            app:srcCompat="@drawable/ic_baseline_attach_money_24" />
+
+                        <TextView
+                            android:id="@+id/tvCardItemPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{dataHolder.price.toString()}"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="normal"
+                            tools:text="30$" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginEnd="10dp"
+                            app:srcCompat="@drawable/ic_baseline_category_24" />
+
+                        <TextView
+                            android:id="@+id/tvCardItemProductCategory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="10dp"
+                            android:text="@{dataHolder.category}"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+                            tools:text="Men's Fashion" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/ivShoppingCart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{() -> listener.onRemoveShoppingCartClick(dataHolder)}"
+                        android:src="@{dataHolder.isShoppingCart ? @drawable/ic_baseline_remove_shopping_cart_24 : @drawable/ic_baseline_add_shopping_cart_24}" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

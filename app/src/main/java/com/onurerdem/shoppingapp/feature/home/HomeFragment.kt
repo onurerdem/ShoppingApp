@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.onurerdem.shoppingapp.data.model.ProductsItem
+import com.onurerdem.shoppingapp.data.model.ProductsItemDTO
 import com.onurerdem.shoppingapp.databinding.FragmentHomeBinding
 import com.onurerdem.shoppingapp.feature.home.adapter.HomeProductAdapter
 import com.onurerdem.shoppingapp.feature.home.adapter.OnShoppingCartClickListener
@@ -30,6 +31,9 @@ class HomeFragment : Fragment(), OnShoppingCartClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         lifecycleScope.launchWhenResumed {
             launch {
@@ -59,6 +63,9 @@ class HomeFragment : Fragment(), OnShoppingCartClickListener {
                                 Snackbar.LENGTH_SHORT
                             ).show()
                         }
+                        is HomeViewEvent.NavigateToDetail -> {
+
+                        }
                     }
                 }
             }
@@ -69,7 +76,7 @@ class HomeFragment : Fragment(), OnShoppingCartClickListener {
         TODO("Not yet implemented")
     }
 
-    override fun onRemoveShoppingCartClick(productsItem: ProductsItem) {
+    override fun onRemoveShoppingCartClick(productsItem: ProductsItemDTO) {
         viewModel.onShoppingCartProduct(productsItem)
     }
 }

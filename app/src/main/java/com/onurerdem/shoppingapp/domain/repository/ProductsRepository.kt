@@ -8,4 +8,5 @@ import kotlinx.coroutines.flow.Flow
 interface ProductsRepository {
     suspend fun getProductDetail(productId: Int): Flow<DataState<ProductsItem>>
     suspend fun getRateProduct(rate: Double): Flow<DataState<Rating>>
+    suspend fun getAllProducts(): Flow<DataState<ArrayList<ProductsItem>>>
 }

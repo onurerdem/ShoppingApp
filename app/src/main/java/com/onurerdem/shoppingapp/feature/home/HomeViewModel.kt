@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.onurerdem.shoppingapp.data.model.ProductsItem
+import com.onurerdem.shoppingapp.data.model.ProductsItemDTO
 import com.onurerdem.shoppingapp.data.remote.utils.DataState
 import com.onurerdem.shoppingapp.domain.repository.ProductsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,13 +34,13 @@ class HomeViewModel @Inject constructor(
 
     private fun getProducts() {
         viewModelScope.launch {
-            productsRepository.getProductDetail(1).collect {
+            productsRepository.getAllProducts().collect {
                 when (it) {
                     is DataState.Success -> {
-                        _uiState.value = HomeViewState.Success(it.data.results?.map {
+                        _uiState.value = HomeViewState.Success(it.data.map {
                             val data = getShoppingCartList(it?.id).first()
 
-                            ProductsItem(
+                            ProductsItemDTO(
                                 id = it?.id,
                                 title = it?.title,
                                 image = it?.image,
@@ -47,7 +48,7 @@ class HomeViewModel @Inject constructor(
                                 category = it?.category,
                                 price = it?.price,
                                 rating = it?.rating,
-                                results = it?.results,
+                                //results = it?.results,
                                 isShoppingCart = data?.find { c -> c == it?.id.toString() } != null
                             )
                         }?.toMutableList())
@@ -80,7 +81,7 @@ class HomeViewModel @Inject constructor(
         awaitClose { callBack.isCanceled() }
     }
 
-    fun onShoppingCartProduct(data: ProductsItem) {
+    fun onShoppingCartProduct(data: ProductsItemDTO) {
         viewModelScope.launch {
             val userId = firebaseAuth.currentUser?.uid
             if (data.isShoppingCart) {
@@ -92,7 +93,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun insertProduct(userId: String, data: ProductsItem) {
+    private fun insertProduct(userId: String, data: ProductsItemDTO) {
         fireStore.collection("shoppingCartProduct").document(userId.toString()).collection("Product")
             .let { ref ->
                 ref.document("${data.id}")
@@ -101,7 +102,11 @@ class HomeViewModel @Inject constructor(
                             "productId" to "${data.id}",
                             "title" to data.title,
                             "price" to data.price,
-                            "image" to data.image
+                            "image" to data.image,
+                            "description" to data.description,
+                            "isShoppingCart" to data.isShoppingCart,
+                            "category" to data.category,
+                            "rating" to data.rating
                         )
                     )
 
@@ -159,9 +164,10 @@ class HomeViewModel @Inject constructor(
 
 sealed class HomeViewEvent {
     data class ShowError(val message: String?) : HomeViewEvent()
+    object NavigateToDetail : HomeViewEvent()
 }
 
 sealed class HomeViewState {
-    class Success(val products: MutableList<ProductsItem>?) : HomeViewState()
+    class Success(val products: MutableList<ProductsItemDTO>?) : HomeViewState()
     object Loading : HomeViewState()
 }
