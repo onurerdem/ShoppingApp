@@ -6,12 +6,11 @@ import com.bumptech.glide.Glide
 import com.onurerdem.shoppingapp.data.remote.utils.Constants
 
 object BindingAdapters {
-
     @JvmStatic
     @BindingAdapter("loadImage")
-    fun loadImage(view: ImageView, url: String?) {
+    fun loadImage(view: ImageView, image: String) {
         Glide.with(view.context)
-            .load("${Constants.BASE_IMAGE_URL}$url")
+            .load(image)
             .into(view)
     }
 }

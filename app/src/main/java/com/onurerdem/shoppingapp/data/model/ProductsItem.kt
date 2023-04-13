@@ -18,9 +18,6 @@ data class ProductsItem(
     val rating: Rating?,
     @SerializedName("title")
     val title: String?,
-    @SerializedName("results")
-    val results: List<ProductsItem?>?,
-    var isShoppingCart: Boolean = false
 )
 
 data class ProductsItemDTO(

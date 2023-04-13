@@ -10,14 +10,6 @@ import javax.inject.Inject
 
 class ProductsRepositoryImpl @Inject constructor(private val productsRemoteDataSource: ProductsRemoteDataSource) :
     ProductsRepository {
-    override suspend fun getProductDetail(productId: Int): Flow<DataState<ProductsItem>> {
-        return productsRemoteDataSource.getProductDetail(productId)
-    }
-
-    override suspend fun getRateProduct(rate: Double): Flow<DataState<Rating>> {
-        return productsRemoteDataSource.getRateProducts(rate)
-    }
-
     override suspend fun getAllProducts(): Flow<DataState<ArrayList<ProductsItem>>> {
         return productsRemoteDataSource.getAllProducts()
     }
