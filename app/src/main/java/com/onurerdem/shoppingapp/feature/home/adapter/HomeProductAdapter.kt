@@ -29,6 +29,10 @@ class HomeProductAdapter(private val listener: OnShoppingCartClickListener) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ProductsItemDTO, listener: OnShoppingCartClickListener) {
             binding.dataHolder = data
+
+            binding.cardViewProduct.setOnClickListener {
+                listener.onProductClick(data)
+            }
             binding.listener = listener
             binding.executePendingBindings()
         }
@@ -48,4 +52,5 @@ class HomeProductAdapter(private val listener: OnShoppingCartClickListener) :
 interface OnShoppingCartClickListener {
     fun onAddShoppingCartClick(id: Int?)
     fun onRemoveShoppingCartClick(productsItem: ProductsItemDTO)
+    fun onProductClick(product: ProductsItemDTO)
 }
