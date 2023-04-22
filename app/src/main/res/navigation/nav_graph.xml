@@ -16,14 +16,29 @@
         <action
             android:id="@+id/action_homeFragment_to_login_graph"
             app:destination="@id/login_graph" />
+        <action
+            android:id="@+id/action_homeFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/shoppingCartFragment"
-        android:name="com.onurerdem.shoppingapp.feature.shoppingcart.ShoppingCartFragment"
+        android:name="com.onurerdem.shoppingapp.feature.shoppingCart.ShoppingCartFragment"
         android:label="ShoppingCartFragment"
-        tools:layout="@layout/fragment_shopping_cart" />
+        tools:layout="@layout/fragment_shopping_cart" >
+        <action
+            android:id="@+id/action_shoppingCartFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_shoppingCartFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
 
     <include app:graph="@navigation/login_graph" />
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.onurerdem.shoppingapp.feature.productDetail.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" />
 
 </navigation>

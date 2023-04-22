@@ -28,5 +28,6 @@ data class ProductsItemDTO(
     val category: String?,
     val image: String?,
     val rating: Rating?,
-    var isShoppingCart: Boolean = false
+    var isShoppingCart: Boolean = false,
+    var quantity: Int = 0
 )
