@@ -29,15 +29,7 @@ class HomeViewModel @Inject constructor(
                 mutableListOf()
             )
         )
-    /*private val _uiSearchState =
-        MutableStateFlow<HomeSearchViewState>(
-            HomeSearchViewState.Success(
-                mutableListOf(),
-                mutableListOf()
-            )
-        )*/
     val uiState: StateFlow<HomeViewState> = _uiState
-    //val uiSearchState: StateFlow<HomeSearchViewState> = _uiSearchState
 
     private val _uiEvent = MutableSharedFlow<HomeViewEvent>(replay = 0)
     val uiEvent: SharedFlow<HomeViewEvent> = _uiEvent
@@ -209,13 +201,3 @@ sealed class HomeViewState {
     object Loading : HomeViewState()
     data class Error(val message: String?) : HomeViewState()
 }
-
-/*sealed class HomeSearchViewState {
-    data class Success(
-        val data: MutableList<ProductsItemDTO>,
-        val filteredData: MutableList<ProductsItemDTO>
-    ) : HomeSearchViewState()
-
-    object Loading : HomeSearchViewState()
-    data class Error(val message: String?) : HomeSearchViewState()
-}*/
