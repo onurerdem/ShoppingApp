@@ -140,6 +140,12 @@ class ShoppingCartFragment : Fragment(), OnShoppingCartClickListener {
 
     override fun onRemoveShoppingCartClick(productsItem: ProductsItemDTO) {
         viewModel.onShoppingCartProduct(productsItem)
+        calculateTotalPrice {
+            val totalPrice = it.round(2)
+            binding.tvShoppinCartTotalPrice.text = "Total Price: $totalPrice TL"
+        }
+        navController!!.navigate(R.id.homeFragment)
+        navController!!.navigate(R.id.shoppingCartFragment)
     }
 
     override fun onProductClick(product: ProductsItemDTO) {
