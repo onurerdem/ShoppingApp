@@ -1,5 +1,6 @@
 package com.onurerdem.shoppingapp.feature.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -119,7 +120,9 @@ class HomeFragment : Fragment(), OnShoppingCartClickListener {
         TODO("Not yet implemented")
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onRemoveShoppingCartClick(productsItem: ProductsItemDTO) {
         viewModel.onShoppingCartProduct(productsItem)
+        binding.rvProductList.adapter?.notifyDataSetChanged()
     }
 }
