@@ -16,6 +16,7 @@ import com.onurerdem.shoppingapp.data.model.ProductsItemDTO
 import com.onurerdem.shoppingapp.databinding.FragmentHomeBinding
 import com.onurerdem.shoppingapp.feature.home.adapter.HomeProductAdapter
 import com.onurerdem.shoppingapp.feature.home.adapter.OnShoppingCartClickListener
+import com.onurerdem.shoppingapp.feature.shoppingCart.ShoppingCartViewState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -48,14 +49,14 @@ class HomeFragment : Fragment(), OnShoppingCartClickListener {
                 viewModel.uiState.collect {
                     when (it) {
                         is HomeViewState.Success -> {
-                            binding.rvProductList.adapter =
-                                HomeProductAdapter(this@HomeFragment).apply {
-                                    submitList(it.products)
-                                }
+                            if (it.filteredData.isEmpty().not()) {
+                                initAdapter(it.filteredData)
+                            } else {
+                                it.data?.let { it1 -> initAdapter(it1) }
+                            }
                         }
-                        is HomeViewState.Loading -> {
 
-                        }
+                        else -> {}
 
                     }
                 }
@@ -78,6 +79,13 @@ class HomeFragment : Fragment(), OnShoppingCartClickListener {
                 }
             }
         }
+    }
+
+    private fun initAdapter(data: MutableList<ProductsItemDTO>) {
+        binding.rvProductList.adapter =
+            HomeProductAdapter(this@HomeFragment).apply {
+                submitList(data)
+            }
     }
 
     private fun searchProduct() {

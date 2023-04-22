@@ -18,6 +18,7 @@ import com.google.firebase.ktx.Firebase
 import com.onurerdem.shoppingapp.R
 import com.onurerdem.shoppingapp.data.model.ProductsItemDTO
 import com.onurerdem.shoppingapp.databinding.FragmentShoppingCartBinding
+import com.onurerdem.shoppingapp.feature.home.HomeViewState
 import com.onurerdem.shoppingapp.feature.home.adapter.HomeProductAdapter
 import com.onurerdem.shoppingapp.feature.home.adapter.OnShoppingCartClickListener
 import com.onurerdem.shoppingapp.utils.BindingAdapters.round
@@ -59,18 +60,14 @@ class ShoppingCartFragment : Fragment(), OnShoppingCartClickListener {
                 viewModel.uiState.collect {
                     when (it) {
                         is ShoppingCartViewState.Success -> {
-                            if (it.filteredData.isEmpty().not()) {
-                                initAdapter(it.filteredData)
-                            } else {
-                                initAdapter(it.data)
-                            }
+                            binding.rvShoppingCart.adapter =
+                                HomeProductAdapter(this@ShoppingCartFragment).apply {
+                                    submitList(it.products)
+                                }
                         }
                         is ShoppingCartViewState.Loading -> {
 
                         }
-                        is ShoppingCartViewState.Error -> {}
-
-                        else -> {}
                     }
                 }
             }
@@ -125,13 +122,6 @@ class ShoppingCartFragment : Fragment(), OnShoppingCartClickListener {
             val totalPrice = it.round(2)
             binding.tvShoppinCartTotalPrice.text = "Total Price: $totalPrice TL"
         }
-    }
-
-    private fun initAdapter(data: MutableList<ProductsItemDTO>) {
-        binding.rvShoppingCart.adapter =
-            HomeProductAdapter(this@ShoppingCartFragment).apply {
-                submitList(data)
-            }
     }
 
     override fun onAddShoppingCartClick(id: Int?) {

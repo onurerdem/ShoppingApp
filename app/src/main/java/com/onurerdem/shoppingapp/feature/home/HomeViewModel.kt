@@ -22,8 +22,20 @@ class HomeViewModel @Inject constructor(
     private val fireStore: FirebaseFirestore
 ) :
     ViewModel() {
-    private val _uiState = MutableStateFlow<HomeViewState>(HomeViewState.Success(mutableListOf()))
-    private val _uiSearchState = MutableStateFlow<HomeSearchViewState>(HomeSearchViewState.Success(mutableListOf(),mutableListOf()))
+    private val _uiState =
+        MutableStateFlow<HomeViewState>(
+            HomeViewState.Success(
+                mutableListOf(),
+                mutableListOf()
+            )
+        )
+    /*private val _uiSearchState =
+        MutableStateFlow<HomeSearchViewState>(
+            HomeSearchViewState.Success(
+                mutableListOf(),
+                mutableListOf()
+            )
+        )*/
     val uiState: StateFlow<HomeViewState> = _uiState
     //val uiSearchState: StateFlow<HomeSearchViewState> = _uiSearchState
 
@@ -53,7 +65,7 @@ class HomeViewModel @Inject constructor(
                                 isShoppingCart = data?.find { c -> c == it?.id.toString() } != null,
                                 quantity = 1
                             )
-                        }?.toMutableList())
+                        }?.toMutableList(), mutableListOf())
                     }
                     is DataState.Error -> {
                         _uiEvent.emit(HomeViewEvent.ShowError(it.error?.status_message))
@@ -117,12 +129,12 @@ class HomeViewModel @Inject constructor(
                     .addOnSuccessListener { documentReference ->
                         viewModelScope.launch {
                             _uiState.value =
-                                HomeViewState.Success((_uiState.value as HomeViewState.Success).products?.map { safeList ->
+                                HomeViewState.Success((_uiState.value as HomeViewState.Success).data?.map { safeList ->
                                     if (safeList?.id == data.id) {
                                         safeList.isShoppingCart = true
                                     }
                                     safeList
-                                }?.toMutableList())
+                                }?.toMutableList(), mutableListOf())
 
                             _uiEvent.emit(HomeViewEvent.ShowError("Product added to shopping cart."))
 
@@ -145,12 +157,12 @@ class HomeViewModel @Inject constructor(
                     .addOnSuccessListener {
                         viewModelScope.launch {
                             _uiState.value =
-                                HomeViewState.Success((_uiState.value as HomeViewState.Success).products?.map { safeList ->
+                                HomeViewState.Success((_uiState.value as HomeViewState.Success).data?.map { safeList ->
                                     if (safeList?.id == id) {
                                         safeList.isShoppingCart = false
                                     }
                                     safeList
-                                }?.toMutableList())
+                                }?.toMutableList(), mutableListOf())
 
                             _uiEvent.emit(HomeViewEvent.ShowError("Product deleted from shopping cart."))
 
@@ -169,18 +181,18 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             val updateQuery = query.lowercase(Locale.getDefault())
 
-            val currentData = (_uiSearchState.value as HomeSearchViewState.Success).data
+            val currentData = (_uiState.value as HomeViewState.Success).data
             if (updateQuery != "") {
-                currentData.let {
+                currentData?.let {
                     val filteredList = it.filter {
                         it.title?.lowercase(Locale.getDefault())?.contains(updateQuery) ?: false
                     }
-                    _uiSearchState.value =
-                        HomeSearchViewState.Success(currentData, filteredList.toMutableList())
+                    _uiState.value =
+                        HomeViewState.Success(currentData, filteredList.toMutableList())
                 }
             } else {
-                _uiSearchState.value =
-                    HomeSearchViewState.Success(currentData, mutableListOf())
+                _uiState.value =
+                    currentData?.let { HomeViewState.Success(it, mutableListOf()) }!!
             }
         }
     }
@@ -192,11 +204,13 @@ sealed class HomeViewEvent {
 }
 
 sealed class HomeViewState {
-    class Success(val products: MutableList<ProductsItemDTO>?) : HomeViewState()
+    class Success(val data: MutableList<ProductsItemDTO>?,
+                  val filteredData: MutableList<ProductsItemDTO>) : HomeViewState()
     object Loading : HomeViewState()
+    data class Error(val message: String?) : HomeViewState()
 }
 
-sealed class HomeSearchViewState {
+/*sealed class HomeSearchViewState {
     data class Success(
         val data: MutableList<ProductsItemDTO>,
         val filteredData: MutableList<ProductsItemDTO>
@@ -204,4 +218,4 @@ sealed class HomeSearchViewState {
 
     object Loading : HomeSearchViewState()
     data class Error(val message: String?) : HomeSearchViewState()
-}
+}*/

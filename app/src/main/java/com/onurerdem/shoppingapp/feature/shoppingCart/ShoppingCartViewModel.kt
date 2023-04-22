@@ -19,16 +19,8 @@ class ShoppingCartViewModel @Inject constructor(
     private val fireStore: FirebaseFirestore,
     private val auth: FirebaseAuth
 ) : ViewModel() {
-    private val _uiState =
-        MutableStateFlow<ShoppingCartViewState>(
-            ShoppingCartViewState.Success(
-                mutableListOf(),
-                mutableListOf()
-            )
-        )
+    private val _uiState = MutableStateFlow<ShoppingCartViewState>(ShoppingCartViewState.Success(mutableListOf()))
     val uiState: StateFlow<ShoppingCartViewState> = _uiState
-    private val _uiShoppingState = MutableStateFlow<ShoppingCartViewState>(ShoppingCartViewState.SuccessShopping(mutableListOf()))
-    val uiShoppingState: StateFlow<ShoppingCartViewState> = _uiShoppingState
 
     private val _uiEvent = MutableSharedFlow<ShoppingCartViewEvent>(replay = 0)
     val uiEvent: SharedFlow<ShoppingCartViewEvent> = _uiEvent
@@ -64,7 +56,7 @@ class ShoppingCartViewModel @Inject constructor(
                         )
                     }
                     _uiState.value =
-                        ShoppingCartViewState.Success(list.toMutableList(), mutableListOf())
+                        ShoppingCartViewState.Success(list.toMutableList())
                 }
             }
                 .addOnFailureListener {}
@@ -87,8 +79,8 @@ class ShoppingCartViewModel @Inject constructor(
                     .delete()
                     .addOnSuccessListener {
                         viewModelScope.launch {
-                            _uiShoppingState.value =
-                                ShoppingCartViewState.SuccessShopping((_uiShoppingState.value as ShoppingCartViewState.SuccessShopping).products?.map { safeList ->
+                            _uiState.value =
+                                ShoppingCartViewState.Success((_uiState.value as ShoppingCartViewState.Success).products?.map { safeList ->
                                     if (safeList?.id == id) {
                                         safeList.isShoppingCart = false
                                     }
@@ -118,13 +110,7 @@ sealed class ShoppingCartViewEvent {
 }
 
 sealed class ShoppingCartViewState {
-    data class Success(
-        val data: MutableList<ProductsItemDTO>,
-        val filteredData: MutableList<ProductsItemDTO>
-    ) : ShoppingCartViewState()
-
-    class SuccessShopping(val products: MutableList<ProductsItemDTO>?) : ShoppingCartViewState()
+    class Success(val products: MutableList<ProductsItemDTO>?) : ShoppingCartViewState()
 
     object Loading : ShoppingCartViewState()
-    data class Error(val message: String?) : ShoppingCartViewState()
 }
