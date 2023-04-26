@@ -40,5 +40,14 @@
         android:name="com.onurerdem.shoppingapp.feature.productDetail.ProductDetailFragment"
         android:label="fragment_product_detail"
         tools:layout="@layout/fragment_product_detail" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.onurerdem.shoppingapp.feature.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_login_graph"
+            app:destination="@id/login_graph" />
+    </fragment>
 
 </navigation>
