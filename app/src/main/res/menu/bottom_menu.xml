@@ -10,4 +10,9 @@
         android:icon="@drawable/ic_baseline_shopping_cart_24"
         android:title="Shopping Cart" />
 
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_baseline_profile_24"
+        android:title="Profile" />
+
 </menu>

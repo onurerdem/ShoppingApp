@@ -46,7 +46,7 @@ class RegisterViewModel @Inject constructor(
     private fun setUserName(userName: String, uuid: String?) {
         viewModelScope.launch {
             dataStoreManager.setUserName(userName)
-            fireStore.collection("users").add(mapOf("username" to userName, "uuid" to uuid))
+            fireStore.collection("users").document(uuid.toString()).set("username" to userName)
                 .addOnSuccessListener { documentReference ->
                     viewModelScope.launch { _uiEvent.emit(RegisterViewEvent.NavigateToMain) }
                 }.addOnFailureListener { error ->
