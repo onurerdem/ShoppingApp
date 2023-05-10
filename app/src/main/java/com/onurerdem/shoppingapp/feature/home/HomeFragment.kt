@@ -18,7 +18,6 @@ import com.onurerdem.shoppingapp.data.model.ProductsItemDTO
 import com.onurerdem.shoppingapp.databinding.FragmentHomeBinding
 import com.onurerdem.shoppingapp.feature.home.adapter.HomeProductAdapter
 import com.onurerdem.shoppingapp.feature.home.adapter.OnShoppingCartClickListener
-import com.onurerdem.shoppingapp.feature.shoppingCart.ShoppingCartViewState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -81,6 +80,10 @@ class HomeFragment : Fragment(), OnShoppingCartClickListener {
                 }
             }
         }
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            navController?.navigate(R.id.homeFragment)
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 
     private fun initAdapter(data: MutableList<ProductsItemDTO>) {
@@ -112,16 +115,16 @@ class HomeFragment : Fragment(), OnShoppingCartClickListener {
     }
 
     override fun onProductClick(product: ProductsItemDTO) {
-        navController?.navigate(R.id.action_homeFragment_to_productDetailFragment,Bundle().apply {
+        navController?.navigate(R.id.action_homeFragment_to_productDetailFragment, Bundle().apply {
             putString("productId", product.id.toString())
-            putString("productImage",product.image.toString())
-            putString("productTitle",product.title)
-            putString("productCategory",product.category.toString())
-            putString("productDescription",product.description.toString())
-            putDouble("productPrice",product.price as Double)
-            putString("productIsShoppingCart",product.isShoppingCart.toString())
-            putString("productQuantity",product.quantity.toString())
-            putString("productRating",product.rating.toString())
+            putString("productImage", product.image.toString())
+            putString("productTitle", product.title)
+            putString("productCategory", product.category.toString())
+            putString("productDescription", product.description.toString())
+            putDouble("productPrice", product.price as Double)
+            putString("productIsShoppingCart", product.isShoppingCart.toString())
+            putString("productQuantity", product.quantity.toString())
+            putString("productRating", product.rating.toString())
 
         })
     }
@@ -139,8 +142,7 @@ class HomeFragment : Fragment(), OnShoppingCartClickListener {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         val callback: OnBackPressedCallback =
-            object : OnBackPressedCallback(true)
-            {
+            object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                     getActivity()?.finish()
                 }
