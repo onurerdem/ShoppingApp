@@ -3,6 +3,7 @@ package com.onurerdem.shoppingapp.feature.onboarding
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -30,6 +31,15 @@ class OnBoardingActivity : AppCompatActivity() {
 
         initViews()
 
+        onBackPressedDispatcher.addCallback(this, object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (binding.viewPager.currentItem != 0) {
+                    binding.viewPager.setCurrentItem(binding.viewPager.currentItem.minus(1), true)
+                } else {
+                    finish()
+                }
+            }
+        })
     }
 
     private fun initViews() {
