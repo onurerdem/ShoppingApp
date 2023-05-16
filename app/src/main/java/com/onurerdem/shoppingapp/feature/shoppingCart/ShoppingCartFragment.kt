@@ -18,7 +18,6 @@ import com.google.firebase.ktx.Firebase
 import com.onurerdem.shoppingapp.R
 import com.onurerdem.shoppingapp.data.model.ProductsItemDTO
 import com.onurerdem.shoppingapp.databinding.FragmentShoppingCartBinding
-import com.onurerdem.shoppingapp.feature.home.HomeViewState
 import com.onurerdem.shoppingapp.feature.home.adapter.HomeProductAdapter
 import com.onurerdem.shoppingapp.feature.home.adapter.OnShoppingCartClickListener
 import com.onurerdem.shoppingapp.utils.BindingAdapters.round
@@ -47,7 +46,7 @@ class ShoppingCartFragment : Fragment(), OnShoppingCartClickListener {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getShoppingCartList()
 
-        binding.cartToolbar.title = "Shopping Cart Product"
+        binding.cartToolbar.title = requireContext().getString(R.string.shopping_cart_product)
 
         navController = findNavController()
 
@@ -95,22 +94,21 @@ class ShoppingCartFragment : Fragment(), OnShoppingCartClickListener {
         binding.btPurchase.setOnClickListener{
             val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
 
-            builder.setMessage("Are you sure you want to complete order?")
-                .setTitle("Complete Order")
+            builder.setMessage(requireContext().getString(R.string.are_you_sure_you_want_to_complete_order))
+                .setTitle(requireContext().getString(R.string.complete_order))
 
             builder.apply {
-                setPositiveButton("Yes") { dialog, id ->
+                setPositiveButton(requireContext().getString(R.string.yes)) { dialog, id ->
                     firestore.collection("shoppingCartProduct").document(userId).collection("product").get().addOnSuccessListener {
                         it.documents.forEach(){
                             it.reference.delete()
                         }
                     navController!!.navigate(R.id.action_shoppingCartFragment_to_homeFragment)
                     }
-                    Toast.makeText(requireContext(),"Purchasing is succesfull. We will deliver the products to you as soon as possible.",
-                        Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), requireContext().getString(R.string.purchasing_is_successfull), Toast.LENGTH_LONG).show()
                 }
-                setNegativeButton("No") { dialog, id ->
-                    Toast.makeText(requireContext(),"You can continue shopping.",Toast.LENGTH_LONG).show()
+                setNegativeButton(requireContext().getString(R.string.no)) { dialog, id ->
+                    Toast.makeText(requireContext(), requireContext().getString(R.string.you_can_continue_shopping), Toast.LENGTH_LONG).show()
                 }
             }
 
@@ -120,7 +118,7 @@ class ShoppingCartFragment : Fragment(), OnShoppingCartClickListener {
 
         calculateTotalPrice {
             val totalPrice = it.round(2)
-            binding.tvShoppinCartTotalPrice.text = "Total Price: $totalPrice TL"
+            binding.tvShoppinCartTotalPrice.text = requireContext().getString(R.string.total_price) + ": $totalPrice $"
         }
     }
 
@@ -132,7 +130,7 @@ class ShoppingCartFragment : Fragment(), OnShoppingCartClickListener {
         viewModel.onShoppingCartProduct(productsItem)
         calculateTotalPrice {
             val totalPrice = it.round(2)
-            binding.tvShoppinCartTotalPrice.text = "Total Price: $totalPrice TL"
+            binding.tvShoppinCartTotalPrice.text = requireContext().getString(R.string.total_price) + ": $totalPrice $"
         }
         navController!!.navigate(R.id.homeFragment)
         navController!!.navigate(R.id.shoppingCartFragment)
@@ -166,7 +164,7 @@ class ShoppingCartFragment : Fragment(), OnShoppingCartClickListener {
                 }
                 shoppingCartList(shoppingCartList)
             }.addOnFailureListener {
-                println("Localized Message: ${it.localizedMessage}")
+                println(requireContext().getString(R.string.localized_message) + ": ${it.localizedMessage}")
             }
     }
 

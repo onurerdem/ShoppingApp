@@ -2,16 +2,21 @@ package com.onurerdem.shoppingapp.feature.home
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.firebase.ui.auth.AuthUI.getApplicationContext
 import com.google.android.material.snackbar.Snackbar
 import com.onurerdem.shoppingapp.R
 import com.onurerdem.shoppingapp.data.model.ProductsItemDTO
@@ -20,12 +25,27 @@ import com.onurerdem.shoppingapp.feature.home.adapter.HomeProductAdapter
 import com.onurerdem.shoppingapp.feature.home.adapter.OnShoppingCartClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.*
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), OnShoppingCartClickListener {
     private val viewModel by viewModels<HomeViewModel>()
     private lateinit var binding: FragmentHomeBinding
     private var navController: NavController? = null
+    private lateinit var sharedPrefs: SharedPreferences
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedPrefs = requireActivity().getSharedPreferences("language", Context.MODE_PRIVATE)
+        val locale = sharedPrefs.getString("language", "")?.let { Locale(it) }
+        if (locale != null) {
+            Locale.setDefault(locale)
+        }
+        val config = Configuration()
+        config.setLocale(locale)
+        @Suppress("DEPRECATION")
+        requireContext().resources.updateConfiguration(config, requireContext().resources.displayMetrics)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +62,7 @@ class HomeFragment : Fragment(), OnShoppingCartClickListener {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        binding.toolbar.title = "Products"
+        binding.toolbar.title = requireContext().getString(R.string.products)
         searchProduct()
 
         lifecycleScope.launchWhenResumed {
@@ -144,7 +164,21 @@ class HomeFragment : Fragment(), OnShoppingCartClickListener {
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    getActivity()?.finish()
+                    val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+
+                    builder.setMessage(requireContext().getString(R.string.are_you_sure_you_want_to_exit))
+                        .setTitle(requireContext().getString(R.string.exit))
+
+                    builder.apply {
+                        setPositiveButton(requireContext().getString(R.string.yes)) { dialog, id ->
+                            getActivity()?.finish()
+                        }
+                        setNegativeButton(requireContext().getString(R.string.no)) { dialog, id ->
+                        }
+                    }
+
+                    val dialog: AlertDialog = builder.create()
+                    dialog.show()
                 }
             }
         requireActivity().onBackPressedDispatcher.addCallback(

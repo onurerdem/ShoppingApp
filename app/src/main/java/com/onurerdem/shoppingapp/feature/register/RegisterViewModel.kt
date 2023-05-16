@@ -1,11 +1,15 @@
 package com.onurerdem.shoppingapp.feature.register
 
+import android.annotation.SuppressLint
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.onurerdem.shoppingapp.R
 import com.onurerdem.shoppingapp.data.local.DataStoreManager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
@@ -13,6 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
+    @ApplicationContext context: Context,
     private val dataStoreManager: DataStoreManager,
     private val firebaseAuth: FirebaseAuth,
     private val fireStore: FirebaseFirestore,
@@ -20,6 +25,9 @@ class RegisterViewModel @Inject constructor(
 
     private val _uiEvent = MutableSharedFlow<RegisterViewEvent>(replay = 0)
     val uiEvent: SharedFlow<RegisterViewEvent> = _uiEvent
+
+    @SuppressLint("StaticFieldLeak")
+    val getContext = context
 
     fun register(email: String, password: String, confirmPassword: String, userName: String) {
         viewModelScope.launch {
@@ -71,13 +79,13 @@ class RegisterViewModel @Inject constructor(
         fun isValidEmail() = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
         if (isValidEmptyField().not()) {
-            return "Please fill all fields"
+            return getContext.getString(R.string.please_fill_all_fields)
         } else if (isValidEmail().not()) {
-            return "Please enter a valid email address"
+            return getContext.getString(R.string.please_enter_a_valid_email_address)
         } else if (isValidConfirmPassword().not()) {
-            return "Passwords do not match"
+            return getContext.getString(R.string.passwords_do_not_match)
         } else if (isValidPasswordLength().not()) {
-            return "Password must be at least 6 characters"
+            return getContext.getString(R.string.password_must_be_at_least_6_characters)
         }
         return null
     }

@@ -38,7 +38,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/toolbar"
-                app:queryHint="Search a name etc">
+                app:queryHint="@string/search_a_name_etc">
 
             </androidx.appcompat.widget.SearchView>
 

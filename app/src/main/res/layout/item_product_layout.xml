@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:adjustViewBounds="true"
-                    android:contentDescription="Product Image"
+                    android:contentDescription="@string/product_image"
                     android:maxHeight="200dp"
                     android:scaleType="fitXY"
                     app:loadImage="@{dataHolder.image}"
@@ -69,7 +69,7 @@
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        tools:text="Men's Hat" />
+                        tools:text="@string/mens_hat" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -91,7 +91,7 @@
                             android:textColor="@color/black"
                             android:textSize="16sp"
                             android:textStyle="normal"
-                            tools:text="30$" />
+                            tools:text="@string/_30_dolar" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -113,7 +113,7 @@
                             android:textColor="@color/black"
                             android:textSize="14sp"
                             android:textStyle="normal"
-                            tools:text="Men's Fashion" />
+                            tools:text="@string/mens_fashion" />
                     </LinearLayout>
 
                     <ImageView

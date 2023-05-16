@@ -45,7 +45,7 @@ class RegisterFragment : Fragment() {
                                 null,
                                 navOptions = NavOptions.Builder().setPopUpTo(0, true).build()
                             )
-                            Snackbar.make(requireView(), "Register Success", Snackbar.LENGTH_SHORT)
+                            Snackbar.make(requireView(), requireContext().getString(R.string.register_success), Snackbar.LENGTH_SHORT)
                                 .show()
 
                         }

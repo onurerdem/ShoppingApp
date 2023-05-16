@@ -1,11 +1,15 @@
 package com.onurerdem.shoppingapp.feature.login
 
+import android.annotation.SuppressLint
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.onurerdem.shoppingapp.R
 import com.onurerdem.shoppingapp.domain.usecase.login.LoginUseCase
 import com.onurerdem.shoppingapp.domain.usecase.login.LoginUseCaseParams
 import com.onurerdem.shoppingapp.domain.usecase.login.LoginUseCaseState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -15,6 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
+    @ApplicationContext context: Context,
     private val loginUseCase: LoginUseCase
 ) : ViewModel() {
 
@@ -23,6 +28,9 @@ class LoginViewModel @Inject constructor(
 
     private val _uiEvent = MutableSharedFlow<LoginViewEvent>(replay = 0)
     val uiEvent: SharedFlow<LoginViewEvent> = _uiEvent
+
+    @SuppressLint("StaticFieldLeak")
+    val getContext = context
 
     fun login(email: String, password: String) {
         viewModelScope.launch {
@@ -39,7 +47,7 @@ class LoginViewModel @Inject constructor(
                     }
                 }
             } else {
-                _uiEvent.emit(LoginViewEvent.ShowError("Please fill all fields"))
+                _uiEvent.emit(LoginViewEvent.ShowError(getContext.getString(R.string.please_fill_all_fields)))
             }
         }
     }

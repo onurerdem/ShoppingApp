@@ -51,15 +51,15 @@
                 android:id="@+id/btPurchase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:text="PURCHASE" />
+                android:layout_marginStart="24dp"
+                android:text="@string/purchase" />
 
             <TextView
                 android:id="@+id/tvShoppinCartTotalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:text="Total Price: 0.0 TL"
+                android:layout_marginStart="24dp"
+                android:text="@string/total_price_0_0_dolar"
                 android:textColor="@color/app_color_1"
                 android:textSize="16sp" />
         </LinearLayout>

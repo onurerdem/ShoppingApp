@@ -124,7 +124,7 @@ class ProductDetailFragment : Fragment() {
                 .addOnSuccessListener {
                     Toast.makeText(
                         requireContext(),
-                        "Product added to shopping cart.",
+                        requireContext().getString(R.string.product_added_to_shopping_cart),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

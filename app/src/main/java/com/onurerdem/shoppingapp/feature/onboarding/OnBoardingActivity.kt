@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.onurerdem.shoppingapp.feature.main.MainActivity
@@ -36,7 +38,21 @@ class OnBoardingActivity : AppCompatActivity() {
                 if (binding.viewPager.currentItem != 0) {
                     binding.viewPager.setCurrentItem(binding.viewPager.currentItem.minus(1), true)
                 } else {
-                    finish()
+                    val builder: AlertDialog.Builder = AlertDialog.Builder(this@OnBoardingActivity)
+
+                    builder.setMessage(this@OnBoardingActivity.getString(R.string.are_you_sure_you_want_to_exit))
+                        .setTitle(this@OnBoardingActivity.getString(R.string.exit))
+
+                    builder.apply {
+                        setPositiveButton(this@OnBoardingActivity.getString(R.string.yes)) { dialog, id ->
+                            finish()
+                        }
+                        setNegativeButton(this@OnBoardingActivity.getString(R.string.no)) { dialog, id ->
+                        }
+                    }
+
+                    val dialog: AlertDialog = builder.create()
+                    dialog.show()
                 }
             }
         })

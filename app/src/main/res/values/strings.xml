@@ -7,4 +7,80 @@
     <string name="on_boarding_skip_button">Skip</string>
     <string name="on_boarding_start_button">Start</string>
     <string name="on_boarding_prev_button">Prev</string>
+    <string name="welcome_to_shopping_app">Welcome to Shopping App</string>
+    <string name="on_boarding_text">This application has been developed so that you can shop safely and easily. We are very pleased to have you among us. Start filling your cart!</string>
+    <string name="on_boarding_two_text">It is now very simple to follow the latest fashion. We wish you good shopping with options suitable for every budget.</string>
+    <string name="on_boarding_three_text">Enjoy safe shopping. Both your contact and payment information are safe with us.</string>
+
+    <!-- Login Page-->
+    <string name="login">Login</string> <!-- Register Page-->
+    <string name="send_a_mail">Send a mail</string> <!-- Register Page-->
+    <string name="send_a_password">Send a password</string> <!-- Register Page-->
+    <string name="or">Or</string> <!-- Register Page-->
+    <string name="register">Register</string> <!-- Register Page-->
+    <string name="login_success">Login success.</string>
+    <string name="login_failed">Login failed.</string>
+    <string name="please_fill_all_fields">Please fill all fields.</string> <!-- Register Page-->
+    <string name="you_can_choose_the_language_you_want_to_use">You can choose the language you want to use.</string>
+    <string name="warning">Warning</string>
+    <string name="turkish">Turkish</string>
+    <string name="english">English</string>
+
+    <!-- Register Page-->
+    <string name="send_a_username">Send a username</string>
+    <string name="register_success">Register success.</string>
+    <string name="please_enter_a_valid_email_address">Please enter a valid email address.</string>
+    <string name="passwords_do_not_match">Passwords do not match.</string>
+    <string name="password_must_be_at_least_6_characters">Password must be at least 6 characters.</string>
+
+    <!-- Home Page-->
+    <string name="search_a_name_etc">Search a name etc</string>
+    <string name="products">Products</string>
+    <string name="product_added_to_shopping_cart">Product added to shopping cart.</string>
+    <string name="product_deleted_from_shopping_cart">Product deleted from shopping cart.</string> <!-- Shopping Cart Page-->
+    <string name="are_you_sure_you_want_to_exit">Are you sure you want to exit?</string> <!-- Login Page--> <!-- Onboarding Page-->
+    <string name="exit">Exit</string> <!-- Login Page--> <!-- Onboarding Page-->
+
+    <!-- Item Product Layout-->
+    <string name="product_image">Product Image</string>
+    <string name="mens_hat">Men\'s Hat</string>
+    <string name="_30_dolar">30 $</string>
+    <string name="mens_fashion">Men\'s Fashion</string>
+
+    <!-- Product Detail Page-->
+    <string name="men_jacket">Men Jacket</string>
+    <string name="_100_dolar">100 $</string>
+    <string name="this_jacket_is_very_good">This jacket is very good, very very very good. This jacket is very good, very very very good. This jacket is very good, very very very good.</string>
+    <string name="add_to_basket">Add To Basket</string>
+    <string name="minus">-</string>
+    <string name="_1">1</string>
+    <string name="plus">+</string>
+    <string name="total_price">Total Price</string> <!-- Shopping Cart Page-->
+    <string name="_0_dolar">0 $</string>
+
+    <!-- Shopping Cart Page-->
+    <string name="purchase">PURCHASE</string>
+    <string name="total_price_0_0_dolar">Total Price: 0.0 $</string>
+    <string name="shopping_cart_product">Shopping Cart Product</string>
+    <string name="are_you_sure_you_want_to_complete_order">Are you sure you want to complete order?</string>
+    <string name="complete_order">Complete Order</string>
+    <string name="yes">Yes</string> <!-- Home Page--> <!-- Login Page--> <!-- Onboarding Page--> <!-- Profile Page-->
+    <string name="purchasing_is_successfull">Purchasing is successful. We will deliver the products to you as soon as possible.</string>
+    <string name="no">No</string> <!-- Home Page--> <!-- Login Page--> <!-- Onboarding Page--> <!-- Profile Page-->
+    <string name="you_can_continue_shopping">You can continue shopping.</string>
+    <string name="localized_message">Localized Message</string>
+
+    <!-- Profile Page-->
+    <string name="username">Username:</string>
+    <string name="space">" "</string>
+    <string name="email">Email:</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="session_terminated">Session terminated.</string>
+    <string name="are_you_sure_you_want_to_sign_out">Are you sure you want to sign out?</string>
+
+    <!-- Bottom Menu-->
+    <string name="home">Home</string>
+    <string name="shopping_cart">Shopping Cart</string>
+    <string name="profile">Profile</string>
+    <string name="language">Language</string>
 </resources>

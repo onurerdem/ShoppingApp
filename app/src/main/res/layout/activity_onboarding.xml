@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:background="#00ADB5"
                     android:backgroundTint="#00ADB5"
-                    android:text="Prev"
+                    android:text="@string/on_boarding_prev_button"
                     android:visibility="gone"
                     app:backgroundTint="#00ADB5"
                     app:layout_constraintBottom_toBottomOf="parent"

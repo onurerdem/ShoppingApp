@@ -1,12 +1,16 @@
 package com.onurerdem.shoppingapp.feature.shoppingCart
 
+import android.annotation.SuppressLint
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.onurerdem.shoppingapp.R
 import com.onurerdem.shoppingapp.data.model.ProductsItemDTO
 import com.onurerdem.shoppingapp.data.model.Rating
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -16,6 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ShoppingCartViewModel @Inject constructor(
+    @ApplicationContext context: Context,
     private val fireStore: FirebaseFirestore,
     private val auth: FirebaseAuth
 ) : ViewModel() {
@@ -28,6 +33,9 @@ class ShoppingCartViewModel @Inject constructor(
     init {
         getShoppingCartList()
     }
+
+    @SuppressLint("StaticFieldLeak")
+    val getContext = context
 
     fun getShoppingCartList() {
         viewModelScope.launch {
@@ -87,7 +95,7 @@ class ShoppingCartViewModel @Inject constructor(
                                     safeList
                                 }?.toMutableList())
 
-                            _uiEvent.emit(ShoppingCartViewEvent.ShowError("Product deleted from shopping cart."))
+                            _uiEvent.emit(ShoppingCartViewEvent.ShowError(getContext.getString(R.string.product_deleted_from_shopping_cart)))
 
                         }
                     }

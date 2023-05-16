@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
                         is MainUiState.Success -> {
                             initNavController(it.isNavigateHome)
                         }
+                        else -> {}
                     }
                 }
             }

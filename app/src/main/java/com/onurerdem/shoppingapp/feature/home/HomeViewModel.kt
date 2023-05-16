@@ -1,13 +1,17 @@
 package com.onurerdem.shoppingapp.feature.home
 
+import android.annotation.SuppressLint
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.onurerdem.shoppingapp.R
 import com.onurerdem.shoppingapp.data.model.ProductsItemDTO
 import com.onurerdem.shoppingapp.data.remote.utils.DataState
 import com.onurerdem.shoppingapp.domain.repository.ProductsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.*
@@ -17,6 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
+    @ApplicationContext context: Context,
     private val productsRepository: ProductsRepository,
     private val firebaseAuth: FirebaseAuth,
     private val fireStore: FirebaseFirestore
@@ -37,6 +42,9 @@ class HomeViewModel @Inject constructor(
     init {
         getProducts()
     }
+
+    @SuppressLint("StaticFieldLeak")
+    val getContext = context
 
     private fun getProducts() {
         viewModelScope.launch {
@@ -75,7 +83,8 @@ class HomeViewModel @Inject constructor(
     private fun getShoppingCartList(id: Int?): Flow<MutableList<String>?> = channelFlow {
         val shoppingCartList = mutableListOf<String>()
         val callBack =
-            fireStore.collection("shoppingCartProduct").document(firebaseAuth.currentUser?.uid.toString())
+            fireStore.collection("shoppingCartProduct")
+                .document(firebaseAuth.currentUser?.uid.toString())
                 .collection("product").document(id.toString()).get().addOnSuccessListener {
                     it.data?.values?.forEach { data ->
                         shoppingCartList.add(data.toString())
@@ -101,7 +110,8 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun insertProduct(userId: String, data: ProductsItemDTO) {
-        fireStore.collection("shoppingCartProduct").document(userId.toString()).collection("product")
+        fireStore.collection("shoppingCartProduct").document(userId.toString())
+            .collection("product")
             .let { ref ->
                 ref.document("${data.id}")
                     .set(
@@ -128,7 +138,7 @@ class HomeViewModel @Inject constructor(
                                     safeList
                                 }?.toMutableList(), mutableListOf())
 
-                            _uiEvent.emit(HomeViewEvent.ShowError("Product added to shopping cart."))
+                            _uiEvent.emit(HomeViewEvent.ShowError(getContext.getString(R.string.product_added_to_shopping_cart)))
 
                         }
                     }
@@ -142,7 +152,8 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun deleteProduct(userId: String, id: Int?) {
-        fireStore.collection("shoppingCartProduct").document(userId.toString()).collection("product")
+        fireStore.collection("shoppingCartProduct").document(userId.toString())
+            .collection("product")
             .let { ref ->
                 ref.document("$id")
                     .delete()
@@ -156,7 +167,7 @@ class HomeViewModel @Inject constructor(
                                     safeList
                                 }?.toMutableList(), mutableListOf())
 
-                            _uiEvent.emit(HomeViewEvent.ShowError("Product deleted from shopping cart."))
+                            _uiEvent.emit(HomeViewEvent.ShowError(getContext.getString(R.string.product_deleted_from_shopping_cart)))
 
                         }
                     }
@@ -196,8 +207,11 @@ sealed class HomeViewEvent {
 }
 
 sealed class HomeViewState {
-    class Success(val data: MutableList<ProductsItemDTO>?,
-                  val filteredData: MutableList<ProductsItemDTO>) : HomeViewState()
+    class Success(
+        val data: MutableList<ProductsItemDTO>?,
+        val filteredData: MutableList<ProductsItemDTO>
+    ) : HomeViewState()
+
     object Loading : HomeViewState()
     data class Error(val message: String?) : HomeViewState()
 }
