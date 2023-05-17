@@ -39,10 +39,10 @@ Splash Ekranı | İlk Onboarding Ekranı | İkinci Onboarding Ekranı | Üçünc
 - [Kotlin Flow](https://developer.android.com/kotlin/flow) - Eşzamanlılarda akış, yalnızca tek bir değer döndüren askıya alma işlevlerinin aksine sırayla birden çok değer yayan bir türdür. Örneğin, bir veritabanından canlı güncellemeler almak için bir akış kullanabilirsiniz.
 - [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android) - Android için, projenizde manuel dependency injection yapma şablonunu azaltan bir dependency injection kitaplığı.
 - [Logging Interceptor](https://github.com/square/okhttp/blob/master/okhttp-logging-interceptor/README.md) - HTTP isteğini ve yanıt verilerini günlüğe kaydeder.
-- [Glide](https://github.com/bumptech/glide)- Android için Kotlin Coroutines tarafından desteklenen bir resim yükleme kitaplığı.
+- [Glide](https://github.com/bumptech/glide) - Android için Kotlin Coroutines tarafından desteklenen bir resim yükleme kitaplığı.
 - [Firebase Authentication](https://firebase.google.com/docs/auth) - Firebase Authentication, uygulamanızda kullanıcıların kimliğini doğrulamak için arka uç hizmetleri, kullanımı kolay SDK'lar ve hazır kullanıcı arabirimi kitaplıkları sağlar. Parolalar, telefon numaraları, Google, Facebook ve Twitter gibi popüler birleştirilmiş kimlik sağlayıcıları ve daha fazlasını kullanarak kimlik doğrulamayı destekler.
 - [Firebase Cloud Firestore](https://firebase.google.com/docs/firestore) - Cloud Firestore, Firebase ve Google Cloud'dan mobil, web ve sunucu geliştirme için esnek, ölçeklenebilir bir veritabanıdır.
-- [Lottie](https://lottiefiles.com/)-  LottieFiles, Motion Design'ın karmaşıklığını ortadan kaldırır. Mümkün olan en kolay şekilde bir Lottie Oluşturmanıza, Düzenlemenize, Test Etmenize, İşbirliği Yapmanıza ve Sevk Etmenize olanak tanır.
+- [Lottie](https://lottiefiles.com/) -  LottieFiles, Motion Design'ın karmaşıklığını ortadan kaldırır. Mümkün olan en kolay şekilde bir Lottie Oluşturmanıza, Düzenlemenize, Test Etmenize, İşbirliği Yapmanıza ve Sevk Etmenize olanak tanır.
 - [Swiperefreshlayout](https://developer.android.com/jetpack/androidx/releases/swiperefreshlayout) - UI modelini yenilemek için kaydırmayı uygulayın.
 
 ## Teşekkürler
