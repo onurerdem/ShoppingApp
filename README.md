@@ -18,11 +18,11 @@ https://1drv.ms/i/s!As4moNPcWJRNgT3jPwoH5iohntz7?e=gaKLI7
 
 Splash Ekranı | İlk Onboarding Ekranı | İkinci Onboarding Ekranı | Üçüncü Onboarding Ekranı | Giriş Ekranı | Kayıt Ekranı
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
-<img src="Read Me/Screenshot_1684275125.png" width="200"/> | <img src="Read Me/Screenshot_1684275153.png" width="134"/> | <img src="Read Me/Screenshot_1684275160.png" width="134"/> | <img src="Read Me/Screenshot_1684275164.png" width="134"/> | <img src="Read Me/Screenshot_1684275181.png" width="180"/> | <img src="Read Me/Screenshot_1684275190.png" width="180"/> |
+<img src="Read Me/Screenshot_1684275125.png" width="200"/> | <img src="Read Me/Screenshot_1684275153.png" width="134"/> | <img src="Read Me/Screenshot_1684275160.png" width="134"/> | <img src="Read Me/Screenshot_1684275164.png" width="124"/> | <img src="Read Me/Screenshot_1684275181.png" width="180"/> | <img src="Read Me/Screenshot_1684275190.png" width="180"/> |
 
 Ürünler Ekranı | Ürün Detay Ekranı | Arama Ekranı | Alışveriş Sepeti Ürün Ekranı | Profil Ekranı |
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
-<img src="Read Me/Screenshot_1684275434.png" width="144"/> | <img src="Read Me/Screenshot_1684275445.png" width="144"/> | <img src="Read Me/Screenshot_1684275753.png" width="144"/> | <img src="Read Me/Screenshot_1684276063.png" width="144"/> | <img src="Read Me/Screenshot_1684276096.png" width="144"/> |
+<img src="Read Me/Screenshot_1684275434.png" width="144"/> | <img src="Read Me/Screenshot_1684275445.png" width="144"/> | <img src="Read Me/Screenshot_1684275753.png" width="144"/> | <img src="Read Me/Screenshot_1684276063.png" width="134"/> | <img src="Read Me/Screenshot_1684276096.png" width="144"/> |
 
 ## Teknoloji Yığını
 - [Kotlin](https://developer.android.com/kotlin) - Kotlin, JVM üzerinde çalışabilen bir programlama dilidir. Google, Android Studio'da resmi olarak desteklenen programlama dillerinden biri olarak Kotlin'i duyurdu; ve Android topluluğu, Java'dan Kotlin'e büyük bir hızla geçiş yapıyor.
