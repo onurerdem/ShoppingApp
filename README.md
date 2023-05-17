@@ -18,7 +18,7 @@ https://1drv.ms/i/s!As4moNPcWJRNgT3jPwoH5iohntz7?e=gaKLI7
 
 Splash Ekranı | İlk Onboarding Ekranı | İkinci Onboarding Ekranı | Üçüncü Onboarding Ekranı | Giriş Ekranı | Kayıt Ekranı
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
-<img src="Read Me/Screenshot_1684275125.png" width="220"/> | <img src="Read Me/Screenshot_1684275153.png" width="140"/> | <img src="Read Me/Screenshot_1684275160.png" width="134"/> | <img src="Read Me/Screenshot_1684275164.png" width="124"/> | <img src="Read Me/Screenshot_1684275181.png" width="220"/> | <img src="Read Me/Screenshot_1684275190.png" width="220"/> |
+<img src="Read Me/Screenshot_1684275125.png" width="220"/> | <img src="Read Me/Screenshot_1684275153.png" width="140"/> | <img src="Read Me/Screenshot_1684275160.png" width="134"/> | <img src="Read Me/Screenshot_1684275164.png" width="114"/> | <img src="Read Me/Screenshot_1684275181.png" width="220"/> | <img src="Read Me/Screenshot_1684275190.png" width="220"/> |
 
 Ürünler Ekranı | Ürün Detay Ekranı | Arama Ekranı | Alışveriş Sepeti Ürün Ekranı | Profil Ekranı |
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
