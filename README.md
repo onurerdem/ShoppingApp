@@ -48,6 +48,6 @@ Splash Ekranı | İlk Onboarding Ekranı | İkinci Onboarding Ekranı | Üçünc
 ## Teşekkürler
 - [Pazarama Ekibi](https://www.pazarama.com/) bu Bootcamp'i açtığı için.
 - [Patika.Dev](https://www.patika.dev/tr) bu eğitim organizasyonunu oluşturduğu için.
-- [@MertToptas](https://github.com/merttoptas) 7 haftalık kotlin eğitimi için.
+- [@MertToptas](https://github.com/merttoptas) 7 haftalık Kotlin eğitimi için.
 - [Bootcamp Ekibim](https://github.com/Pazarama-Android-Kotlin-Bootcamp) iyi bir ekip üyesi olduğu için.
 
