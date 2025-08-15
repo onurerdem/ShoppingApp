@@ -1,8 +1,8 @@
 ext {
     //SDK
     minSdkVersion = 21
-    compileSdkVersion = 34
-    targetSdkVersion = 34
+    compileSdkVersion = 36
+    targetSdkVersion = 36
 
     //Dependencies
     core_ktx_version = "1.9.0"
@@ -23,7 +23,7 @@ ext {
     navigation_version = "2.5.3"
 
     //Hilt
-    hilt_version = "2.44"
+    hilt_version = "2.48"
 
     //Lottie
     lottie_version = "4.2.2"
